@@ -40,7 +40,7 @@ fn main() -> anyhow::Result<()> {
         } = build;
         let sha256 = &sha256[2..];
         let url = format!(
-            "https://github.com/ethereum/solc-bin/raw/gh-pages/bin/{}",
+            "https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/{}",
             path
         );
         let name = format!("solc_{}", version.replace(".", "_"));
@@ -54,7 +54,7 @@ fn main() -> anyhow::Result<()> {
                 };
                 dontBuild = true;
                 dontUnpack = true;
-                installPhase = "mkdir -p $out/bin; cp $src $out/bin/solc";
+                installPhase = "mkdir -p $out/bin; cp $src $out/bin/solc; chmod +x $out/bin/solc";
             };
         };
         tokens.push();
