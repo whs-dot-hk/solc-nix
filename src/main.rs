@@ -23,6 +23,7 @@ fn main() -> anyhow::Result<()> {
 
     let list: List = serde_json::from_reader(reader)?;
 
+    let auto_patchelf_hook = &nix::inherit("inputs.nixpkgs", "autoPatchelfHook");
     let stdenv = &nix::inherit("inputs.nixpkgs", "stdenv");
 
     let mut tokens = Tokens::new();
@@ -52,6 +53,7 @@ fn main() -> anyhow::Result<()> {
                     url = $(quoted(url));
                     sha256 = $(quoted(sha256));
                 };
+                nativeBuildInputs = [$auto_patchelf_hook];
                 dontBuild = true;
                 dontUnpack = true;
                 installPhase = "mkdir -p $out/bin; cp $src $out/bin/solc; chmod +x $out/bin/solc";
