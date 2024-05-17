@@ -19,7 +19,7 @@ struct Build {
 
 fn main() -> anyhow::Result<()> {
     let f = File::open("list.json")?;
-    let mut reader = BufReader::new(f);
+    let reader = BufReader::new(f);
 
     let list: List = serde_json::from_reader(reader)?;
 
