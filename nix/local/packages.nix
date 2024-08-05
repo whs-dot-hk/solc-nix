@@ -976,4 +976,16 @@ in
         dontUnpack = true;
         installPhase = "mkdir -p $out/bin; cp $src $out/bin/solc; chmod +x $out/bin/solc";
     };
+    solc_0_8_26 = stdenv.mkDerivation rec {
+        pname = "solc";
+        version = "0.8.26";
+        src = builtins.fetchurl {
+            url = "https://github.com/ethereum/solc-bin/raw/gh-pages/linux-amd64/solc-linux-amd64-v0.8.26+commit.8a97fa7a";
+            sha256 = "d5f23436f443edb85d8e76906d12f0a86ce0490e7663a9e608efeb7a93f149ef";
+        };
+        nativeBuildInputs = [autoPatchelfHook];
+        dontBuild = true;
+        dontUnpack = true;
+        installPhase = "mkdir -p $out/bin; cp $src $out/bin/solc; chmod +x $out/bin/solc";
+    };
 }
